@@ -1,5 +1,5 @@
 # A serverless/FaaS scheduler to optimize performance in Knative.
-## S-Cache: Function Caching for Serverless Edge Computin
+## S-Cache: Function Caching for Serverless Edge Computing
 
 This is the repository for the source code of the following paper:
 
