@@ -1,0 +1,11 @@
+{	
+    "TopoName": "./config/pi_nodes.csv",
+    "RequestFile": "./config/prediction.csv",
+    "SchedulerName": "my-scheduler",
+    "LatencyPara": 0.000003336,
+    "MemCap": 1000,
+    "NodeNum": 10,
+    "Beta": 1.5,
+    "SlotNum": 5,
+    "ReduFactor": 5000
+}

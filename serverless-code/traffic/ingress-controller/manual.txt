@@ -1,0 +1,11 @@
+#install ingress controller 
+sh install-ingress.sh
+
+#make sure service exists
+
+#bind a ingress to service
+kubectl apply -f  ingress-obj.yaml
+
+# curl the host
+curl <worker-external-ip>:<node-port> -H 'Host: web.example.com'
+

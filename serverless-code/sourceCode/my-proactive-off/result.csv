@@ -1,0 +1,63 @@
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,coldfreq,unused num,unused mem
+0.00,96.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,coldfreq,unused num,unused mem
+0.00,96.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,coldfreq,unused num,unused mem
+0.00,96.00,394.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,coldfreq,unused num,unused mem
+0.00,96.00,394.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+0.00,96.00,394.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+15.00,96.00,394.00,0.16,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+0.00,96.00,394.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+0.00,96.00,%!f(int=3661),0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+0.00,96.00,%!f(int=3661),0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+0.00,96.00,394.00,0.00,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+36.00,96.00,394.00,0.38,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+36.00,96.00,394.00,0.38,17.00,2517.45
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+17.00,214.00,394.00,0.08,17.00,2517.45
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+17.00,191.00,394.00,0.09,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+16.00,215.00,394.00,0.07,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+101.00,157.00,394.00,0.64,5.00,458.85
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+16.00,215.00,394.00,0.07,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+16.00,215.00,394.00,0.07,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+16.00,215.00,394.00,0.07,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+16.00,215.00,394.00,0.07,0.00,0.00
+timeslot,ID,commlatency,runninglatency,all,iscold,ispredicted
+coldnum,servednum,totalnum,coldfreq,unused num,unused mem
+16.00,215.00,394.00,0.07,16.00,2186.34

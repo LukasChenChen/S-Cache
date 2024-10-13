@@ -1,0 +1,318 @@
+apiVersion: v1
+items:
+- metadata:
+    annotations:
+      networking.knative.dev/poke: v0.26
+    creationTimestamp: '2022-05-16T11:03:25Z'
+    generateName: 3scale-kourier-gateway-54c49c8ff5-
+    labels:
+      app: 3scale-kourier-gateway
+      pod-template-hash: 54c49c8ff5
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:networking.knative.dev/poke: {}
+          f:generateName: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:pod-template-hash: {}
+          f:ownerReferences:
+            .: {}
+            k:{"uid":"bd243bb1-b083-43e0-ac29-ecbf065e0527"}: {}
+        f:spec:
+          f:containers:
+            k:{"name":"kourier-gateway"}:
+              .: {}
+              f:args: {}
+              f:command: {}
+              f:image: {}
+              f:imagePullPolicy: {}
+              f:lifecycle:
+                .: {}
+                f:preStop:
+                  .: {}
+                  f:exec:
+                    .: {}
+                    f:command: {}
+              f:name: {}
+              f:ports:
+                .: {}
+                k:{"containerPort":8080,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+                k:{"containerPort":8081,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+                k:{"containerPort":8090,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+                k:{"containerPort":8443,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+                k:{"containerPort":9443,"protocol":"TCP"}:
+                  .: {}
+                  f:containerPort: {}
+                  f:name: {}
+                  f:protocol: {}
+              f:readinessProbe:
+                .: {}
+                f:failureThreshold: {}
+                f:httpGet:
+                  .: {}
+                  f:httpHeaders: {}
+                  f:path: {}
+                  f:port: {}
+                  f:scheme: {}
+                f:initialDelaySeconds: {}
+                f:periodSeconds: {}
+                f:successThreshold: {}
+                f:timeoutSeconds: {}
+              f:resources: {}
+              f:securityContext:
+                .: {}
+                f:allowPrivilegeEscalation: {}
+                f:capabilities:
+                  .: {}
+                  f:drop: {}
+                f:readOnlyRootFilesystem: {}
+                f:runAsNonRoot: {}
+              f:terminationMessagePath: {}
+              f:terminationMessagePolicy: {}
+              f:volumeMounts:
+                .: {}
+                k:{"mountPath":"/tmp/config"}:
+                  .: {}
+                  f:mountPath: {}
+                  f:name: {}
+          f:dnsPolicy: {}
+          f:enableServiceLinks: {}
+          f:restartPolicy: {}
+          f:schedulerName: {}
+          f:securityContext: {}
+          f:terminationGracePeriodSeconds: {}
+          f:volumes:
+            .: {}
+            k:{"name":"config-volume"}:
+              .: {}
+              f:configMap:
+                .: {}
+                f:defaultMode: {}
+                f:name: {}
+              f:name: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: '2022-05-16T11:03:25Z'
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:conditions:
+            k:{"type":"ContainersReady"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Initialized"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Ready"}:
+              .: {}
+              f:lastProbeTime: {}
+              f:lastTransitionTime: {}
+              f:status: {}
+              f:type: {}
+          f:containerStatuses: {}
+          f:hostIP: {}
+          f:phase: {}
+          f:podIP: {}
+          f:podIPs:
+            .: {}
+            k:{"ip":"10.244.1.45"}:
+              .: {}
+              f:ip: {}
+          f:startTime: {}
+      manager: kubelet
+      operation: Update
+      subresource: status
+      time: '2022-11-22T10:12:22Z'
+    name: 3scale-kourier-gateway-54c49c8ff5-2bzjp
+    namespace: kourier-system
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: 3scale-kourier-gateway-54c49c8ff5
+      uid: bd243bb1-b083-43e0-ac29-ecbf065e0527
+    resourceVersion: '3136876'
+    uid: d2303c2d-13dc-4c2b-b6cb-de78951f1b60
+  spec:
+    containers:
+    - args:
+      - --base-id 1
+      - -c /tmp/config/envoy-bootstrap.yaml
+      - --log-level info
+      command:
+      - /usr/local/bin/envoy
+      image: docker.io/envoyproxy/envoy:v1.19-latest
+      imagePullPolicy: IfNotPresent
+      lifecycle:
+        preStop:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - curl -X POST --unix /tmp/envoy.admin http://localhost/healthcheck/fail;
+              sleep 15
+      name: kourier-gateway
+      ports:
+      - containerPort: 8080
+        name: http2-external
+        protocol: TCP
+      - containerPort: 8081
+        name: http2-internal
+        protocol: TCP
+      - containerPort: 8443
+        name: https-external
+        protocol: TCP
+      - containerPort: 8090
+        name: http-probe
+        protocol: TCP
+      - containerPort: 9443
+        name: https-probe
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          httpHeaders:
+          - name: Host
+            value: internalkourier
+          path: /ready
+          port: 8081
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources: {}
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+          - all
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /tmp/config
+        name: config-volume
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-kqhdk
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: kworker-1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: kourier-bootstrap
+      name: config-volume
+    - name: kube-api-access-kqhdk
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: '2022-05-16T11:03:25Z'
+      status: 'True'
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: '2022-11-22T10:12:22Z'
+      status: 'True'
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: '2022-11-22T10:12:22Z'
+      status: 'True'
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: '2022-05-16T11:03:25Z'
+      status: 'True'
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://3a4c8e0cc64f13132510a5bf5a3071a79b0261b50eabe681ba0a7d67825bc74c
+      image: docker.io/envoyproxy/envoy:v1.19-latest
+      imageID: docker.io/envoyproxy/envoy@sha256:70ea1feabf3722776c7c23d9346cff54de3a60db612b62620a8b339d59d8c01d
+      lastState:
+        terminated:
+          containerID: containerd://055661ec1a181675d2d98b91c10d5da8556fc1b74660a90acfa8e94032f260ae
+          exitCode: 255
+          finishedAt: '2022-11-22T10:11:09Z'
+          reason: Unknown
+          startedAt: '2022-11-20T11:26:39Z'
+      name: kourier-gateway
+      ready: true
+      restartCount: 22
+      started: true
+      state:
+        running:
+          startedAt: '2022-11-22T10:12:08Z'
+    hostIP: 10.154.0.21
+    phase: Running
+    podIP: 10.244.1.45
+    podIPs:
+    - ip: 10.244.1.45
+    qosClass: BestEffort
+    startTime: '2022-05-16T11:03:25Z'
+kind: PodList
+metadata:
+  resourceVersion: '3238795'

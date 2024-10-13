@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-scheduler
+  name: my-scheduler
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      component: my-scheduler
+      tier: control-plane
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: my-scheduler
+        tier: control-plane
+        version: second
+    spec:
+      serviceAccount: default
+      containers:
+        - name: my-scheduler
+          image: cocc/scheduler-demo:v7.0
+          volumeMounts:
+          - name: config-volume
+            mountPath: /app/config/my-config.json
+            subPath: my-config.json
+      volumes: 
+      - name: config-volume
+        configMap:
+          name: my-cfgmap

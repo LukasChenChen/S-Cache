@@ -1,0 +1,9 @@
+  # Controls whether write access for persistent volumes is enabled or not.
+>     # 1. Enabled: enabling write access for persistent volumes
+>     # 2. Disabled: disabling write access for persistent volumes
+>     kubernetes.podspec-persistent-volume-write: "disabled"
+>   kubernetes.podspec-schedulername: enabled
+> kind: ConfigMap
+> metadata:
+>   annotations:
+>     knative.dev/example-checksum: e1c6e542

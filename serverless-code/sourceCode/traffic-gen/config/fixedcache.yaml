@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fc-scheduler
+  name: fc-scheduler
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      component: fc-scheduler
+      tier: control-plane
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: fc-scheduler
+        tier: control-plane
+        version: second
+    spec:
+      serviceAccount: default
+      containers:
+        - name: fc-scheduler
+          image: cocc/fixedcaching:v2.5
+          volumeMounts:
+          - name: config-volume
+            mountPath: /app/config/my-config.json
+            subPath: my-config.json
+      volumes: 
+      - name: config-volume
+        configMap:
+          name: my-cfgmap

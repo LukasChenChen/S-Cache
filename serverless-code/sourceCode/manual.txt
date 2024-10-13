@@ -1,0 +1,43 @@
+#idea
+#1. create a service account ,get its token and put it in the code.
+#2. bind the service account to clusterrole cluster-admin
+##.in code main.go must disable https cert verify
+#3. access the api server by using api-server ip and port 6443 or 443 in the pod application
+#4. assign pod to node
+
+
+#get/edit the configmap for knative multi-scheduler
+kubectl get configmap -n knative-serving config-features -oyaml
+
+kubectl edit configmap -n knative-serving config-features -oyaml
+
+#enable the schedulerName, if cannot save, check format and if the entry exists at bottom.
+
+#build docker image
+docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7  -t cocc/scheduler-demo:v3.0 .
+
+#check location and credentials that kubectl know
+kubectl config view
+
+#create a default account
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: default-token
+  annotations:
+    kubernetes.io/service-account.name: default
+type: kubernetes.io/service-account-token
+EOF
+
+#apply clusterrole binding to admin
+sample-scheduler.yaml
+
+#get its token
+kubectl describe secret default-token | grep -E '^token'
+
+#curl deployments
+curl https://10.154.0.20:6443/apis/apps/v1/namespaces/default/deployments
+
+#test access api
+curl https://10.154.0.20:6443/api/v1/nodes --header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IkduSXA4dG9BZExKMmExUXpNcWcwSG9QWHJFc0ZWZFZUTzFVdlVKWkh0OUUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImQ0ZmE4ZGE2LThkOTktNDc0My1hOTk0LTAxODU3N2JlMGZkMSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.IXqZ2bfsqN41VWiQWvnRfi3SguSiBBBbYMjrpje4wcXMvnfdRzmJt9DepVFGfsgPEnGVuLGBAjeerStjj5GuREfXb8zlvnp_APLsDQLvZCR8ErsCZuvgR63DVW3p_Cl9K5clKu2ZzQiaTUA3J49b6xRdKKG8WHwuhxpt1hIvHmTRXciTtAdCnMr6DkFRu2WZ2aONzctTTn4LhSv2Ze7_6lAF7VKCUzOT2ZdBbkpB1p510s5vxRGyWkcDmLTFru65kw6prphPlR2DpkzzxGWcDFmyXQ6zEuJH9RPMRqVjJb0EsCzZ4wsP1BBWdM7OyVBv4eQYL7ISfjeXxlfKqKrrmw" --insecure
